@@ -1,5 +1,5 @@
 import {
-    CABINET_ROUTE, CHAT_ROUTE,
+    CHAT_ROUTE,
     HOMEANALYSE_ROUTE,
     LOGIN_DEFAULT_ROUTE,
     LOGIN_ROUTE,
@@ -9,7 +9,6 @@ import {
 import Home_analyse from "./pages/Home_analyse";
 import Visit from "./pages/Visit";
 import Login from "./pages/Login";
-import Chat from "./chat/chat";
 
 export const authRoutes = [
     {
@@ -22,7 +21,7 @@ export const authRoutes = [
     },
     {
         path: CHAT_ROUTE,
-        Component: Chat
+        Component: Login
     }
 ]
 export const publicRoutes = [
