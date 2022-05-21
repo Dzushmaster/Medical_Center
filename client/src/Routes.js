@@ -4,11 +4,14 @@ import {
     LOGIN_DEFAULT_ROUTE,
     LOGIN_ROUTE,
     REGISTER_ROUTE,
-    VISIT_ROUTE
+    VISIT_ROUTE,
+    CONSULTATION_ROUTE
 } from "./utils/consts";
 import Home_analyse from "./pages/Home_analyse";
 import Visit from "./pages/Visit";
 import Login from "./pages/Login";
+import Join from './components/Join/Join'
+import Chat from './components/Chat/Chat'
 
 export const authRoutes = [
     {
@@ -20,8 +23,12 @@ export const authRoutes = [
         Component: Visit
     },
     {
+        path: CONSULTATION_ROUTE,
+        Component: Join
+    },
+    {
         path: CHAT_ROUTE,
-        Component: Login
+        Component: Chat
     }
 ]
 export const publicRoutes = [

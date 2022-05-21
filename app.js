@@ -9,8 +9,6 @@ const io = require('socket.io')(httpServer, {
     }
 })
 const {addUser, getUser, removeUser, getUsersInRoom} = require('./users');
-const registerMessageHandlers = require('./handlers/messageHandlers');
-const registerUserHandlers = require('./handlers/userHandlers');
 const sequelize = require('./db')
 const cookieParser = require('cookie-parser')
 const errorHandler = require('./middleware/errorApiMiddleware')
