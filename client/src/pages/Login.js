@@ -29,7 +29,6 @@ const Login = observer(() => {
                 history.push(VISIT_ROUTE)
             } else {
                 response = await registration(_fullname, _birthdate, _gender, _telephone, _email, _login, _password, _conf_password)
-                console.log(response)
                 history.push(LOGIN_ROUTE)
             }
         }catch (e){

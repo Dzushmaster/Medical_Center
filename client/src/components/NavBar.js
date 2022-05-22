@@ -27,6 +27,10 @@ const NavBar = observer(() => {
     function getChat(){
         history.push(CONSULTATION_ROUTE)
     }
+    function logout(){
+
+        history.push(LOGIN_ROUTE)
+    }
     const {user} = useContext(Context)
     return (
             <Navbar bg="success" variant="dark">

@@ -60,5 +60,9 @@ class UserController {
             return next(ApiError.internal(e))
         }
     }
+    async check(req, res, next){
+        const accessToken = jwt.sign({id: user.id, email:user.login}, process.env.JWT_ACCESS_KEY, {expiresIn:'24h'})
+        return res.json({accessToken})
+    }
 }
 module.exports = new UserController()
