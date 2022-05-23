@@ -49,14 +49,16 @@ const User = sequelize.define('users', {
 const Visit = sequelize.define('visities', {
     id:{type:DataTypes.INTEGER, primaryKey:true, autoIncrement:true, allowNull:false},
     date:{type: DataTypes.DATEONLY ,allowNull: false, timestamps: false},
-    time:{type: DataTypes.TIME, allowNull: false}
+    begin:{type: DataTypes.TIME, allowNull: false},
+    end:{type: DataTypes.TIME, allowNull: false}
 })
 const Workday = sequelize.define('workdays', {
     id:{type:DataTypes.INTEGER, primaryKey:true, autoIncrement:true, allowNull:false},
     cabinet:{type: DataTypes.SMALLINT ,allowNull: false},
     day:{type: DataTypes.DATEONLY ,allowNull: false},
     begin:{type: DataTypes.TIME ,allowNull: false},
-    end:{type: DataTypes.TIME ,allowNull: false}
+    end:{type: DataTypes.TIME ,allowNull: false},
+    busy:{type: DataTypes.BOOLEAN, allowNull: false, default: false}
 })
 User.hasMany(Visit)
 Visit.belongsTo(User)

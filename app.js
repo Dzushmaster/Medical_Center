@@ -16,6 +16,17 @@ const cors = require('./middleware/cors')
 const router = require('./routers/index')
 app.use(cors)
 app.use(express.json())
+app.use((req, res, next)=>{
+    if(req.headers.authorization){
+        jwt.verify(req.headers.authorization.split(' ')[1], process.env.JWT_ACCESS_KEY, (err, payload)=>{
+            if(err) next()
+            else if(payload){
+                req.payload = payload
+                next()
+            }
+        })
+    }else next()
+})
 app.use('/api', router)
 app.use(cookieParser())
 

@@ -11,6 +11,7 @@ import {
     VISIT_ROUTE
 } from "../utils/consts";
 const NavBar = observer(() => {
+    const {user} = useContext(Context)
     const history = useHistory()
     function getLogin(){
         history.push(LOGIN_ROUTE)
@@ -28,10 +29,11 @@ const NavBar = observer(() => {
         history.push(CONSULTATION_ROUTE)
     }
     function logout(){
-
+        user.setUser({})
+        user.setIsAuth(false)
         history.push(LOGIN_ROUTE)
     }
-    const {user} = useContext(Context)
+
     return (
             <Navbar bg="success" variant="dark">
                 <Container >
@@ -40,7 +42,7 @@ const NavBar = observer(() => {
                             <Nav>
                                 <Button onClick={getTickets} variant={"outline-dark"} >Tickets</Button>
                                 <Button onClick={getHomeAnalyse} variant={"outline-dark"} className="mx-1">Home analyses</Button>
-                                <Button variant={"outline-dark"} >Log out</Button>
+                                <Button onClick={logout} variant={"outline-dark"} >Log out</Button>
                                 <Button onClick={getChat} variant={"outline-dark"} className="mx-1">Consultation</Button>
                             </Nav>
                             :

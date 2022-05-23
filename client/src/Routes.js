@@ -5,13 +5,14 @@ import {
     LOGIN_ROUTE,
     REGISTER_ROUTE,
     VISIT_ROUTE,
-    CONSULTATION_ROUTE
+    CONSULTATION_ROUTE, DOCTOR_ROUTE
 } from "./utils/consts";
 import Home_analyse from "./pages/Home_analyse";
 import Visit from "./pages/Visit";
 import Login from "./pages/Login";
 import Join from './components/Join/Join'
 import Chat from './components/Chat/Chat'
+import VisitPage from "./pages/VisitPage";
 
 export const authRoutes = [
     {
@@ -29,6 +30,10 @@ export const authRoutes = [
     {
         path: CHAT_ROUTE,
         Component: Chat
+    },
+    {
+        path: DOCTOR_ROUTE + '/:id',
+        Component: VisitPage
     }
 ]
 export const publicRoutes = [
