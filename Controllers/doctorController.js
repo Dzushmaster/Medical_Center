@@ -1,4 +1,4 @@
-const {Doctor} = require('../Models/models')
+const {Doctor, Visit} = require('../Models/models')
 const ApiError = require('../errors/ApiError')
 class VisitController{
     getPage(req, res){
@@ -13,7 +13,7 @@ class VisitController{
         }catch(e){
             return next(ApiError.internal(e))
         }
-    }
+    }/*
     async create(req, res, next){
         try {
             if(!req.payload){
@@ -37,6 +37,7 @@ class VisitController{
             return next(ApiError.internal(e))
         }
     }
+    */
 }
 
 module.exports = new VisitController()

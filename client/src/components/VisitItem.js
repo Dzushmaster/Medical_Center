@@ -10,7 +10,7 @@ const VisitItem = ({visit}) => {
     const _doctor = doctor._doctors.find(doc=>doc.id === visit.docId)
     const addVisit = async()=>{
         try{
-            let response = add({date: visit.date, begin: visit.begin, end: visit.end, userId: user.user.id, docId: _doctor.id})
+            let response = add(visit.date, visit.begin, visit.end, user.user.id, _doctor.id)
         }catch(e){
             alert(e.response.data.message)
         }

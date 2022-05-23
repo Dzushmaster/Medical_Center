@@ -14,6 +14,7 @@ const cookieParser = require('cookie-parser')
 const errorHandler = require('./middleware/errorApiMiddleware')
 const cors = require('./middleware/cors')
 const router = require('./routers/index')
+//const cors = require("cors");
 app.use(cors)
 app.use(express.json())
 app.use((req, res, next)=>{

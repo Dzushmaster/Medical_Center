@@ -14,7 +14,19 @@ import Join from './components/Join/Join'
 import Chat from './components/Chat/Chat'
 import VisitPage from "./pages/VisitPage";
 
-export const authRoutes = [
+export const publicRoutes = [
+    {
+        path: LOGIN_DEFAULT_ROUTE,
+        Component: Login
+    },
+    {
+        path: LOGIN_ROUTE,
+        Component: Login
+    },
+    {
+        path: REGISTER_ROUTE,
+        Component: Login
+    },
     {
         path: HOMEANALYSE_ROUTE,
         Component: Home_analyse
@@ -34,19 +46,5 @@ export const authRoutes = [
     {
         path: DOCTOR_ROUTE + '/:id',
         Component: VisitPage
-    }
-]
-export const publicRoutes = [
-    {
-        path: LOGIN_DEFAULT_ROUTE,
-        Component: Login
-    },
-    {
-        path: LOGIN_ROUTE,
-        Component: Login
-    },
-    {
-        path: REGISTER_ROUTE,
-        Component: Login
     }
 ]

@@ -23,10 +23,11 @@ const Login = observer(() => {
         try {
             let response
             if (isLogin) {
+                console.log('dick')
                 response = await login(_login, _password)
+                console.log('dick')
                 user.setUser(response)
                 user.setIsAuth(true)
-                console.log(user)
                 history.push(VISIT_ROUTE)
             } else {
                 await registration(_fullname, _birthdate, _gender, _telephone, _email, _login, _password, _conf_password)

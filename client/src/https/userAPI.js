@@ -8,8 +8,3 @@ export const login = async (login, password)=>{
     localStorage.setItem('accessToken', data.accessToken)
     return jwtDecode(data.accessToken)
 }
-export const check = async()=>{
-    const {data} = await $authHost.get('/api/user/auth')
-    localStorage.setItem('accessToken', data.accessToken)
-    return jwtDecode(data.accessToken)
-}
