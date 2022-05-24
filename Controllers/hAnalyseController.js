@@ -1,12 +1,10 @@
 const {HAnalyse} = require('../Models/models')
 const ApiError = require('../errors/ApiError')
-const {validationResult} = require("express-validator");
 const DEFAULT_VALUE = 0
 class HAnalyseController{
     getPage(req, res){
 
     }
-    //get all user analyses sorted by pages
     async create(req, res, next){
         try {
             const {id, pulse = DEFAULT_VALUE, temperature = DEFAULT_VALUE, blood_press = ' ', date} = req.body

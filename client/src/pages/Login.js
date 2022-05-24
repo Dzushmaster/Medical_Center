@@ -23,9 +23,7 @@ const Login = observer(() => {
         try {
             let response
             if (isLogin) {
-                console.log('dick')
                 response = await login(_login, _password)
-                console.log('dick')
                 user.setUser(response)
                 user.setIsAuth(true)
                 history.push(VISIT_ROUTE)

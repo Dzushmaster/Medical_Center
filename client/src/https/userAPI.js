@@ -8,3 +8,8 @@ export const login = async (login, password)=>{
     localStorage.setItem('accessToken', data.accessToken)
     return jwtDecode(data.accessToken)
 }
+export const destroy = async(id) => {
+    const {data} = await $host.delete(`/api/user/deleteUser/:${id}`)
+    localStorage.setItem('accessToken', '')
+    return data
+}

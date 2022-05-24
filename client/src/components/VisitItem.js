@@ -6,16 +6,13 @@ import {add} from "../https/visitApi";
 
 const VisitItem = ({visit}) => {
     const {user} = useContext(Context)
-    const {doctor} = useContext(Context)
-    const _doctor = doctor._doctors.find(doc=>doc.id === visit.docId)
     const addVisit = async()=>{
         try{
-            let response = add(visit.date, visit.begin, visit.end, user.user.id, _doctor.id)
+            let response = add(visit.day, visit.begin, visit.end, user._user.id, visit.doctorId)
         }catch(e){
-            alert(e.response.data.message)
+            alert(e)
         }
     }
-    //onclicck post запрос на добавление в таблицу visit
     return (
         <Col md={4} className="mt-4" onClick={addVisit}>
             <Card style={{cursor:"pointer"}}>

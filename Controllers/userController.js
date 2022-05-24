@@ -49,7 +49,7 @@ class UserController {
     }
     async destroyUser(req, res, next){
         try{
-            const {id} = req.body
+            const id = req.params.id[1]
             if(!id) return next(ApiError.badRequest('Id is not given'))
             const user = await User.destroy({
                 where:{id: id}
@@ -59,10 +59,6 @@ class UserController {
         }catch(e){
             return next(ApiError.internal(e))
         }
-    }
-    async check(req, res, next){
-        const accessToken = jwt.sign({id: user.id, login:user.login}, process.env.JWT_ACCESS_KEY, {expiresIn:'24h'})
-        return res.json({accessToken})
     }
 }
 module.exports = new UserController()

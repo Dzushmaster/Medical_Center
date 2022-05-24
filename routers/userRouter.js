@@ -15,6 +15,5 @@ router.post('/register',
     body('login').isLength({min: 7, max: 30}),
     body('password').isLength({min:7, max:32}),
     userController.register)
-router.delete('/deleteUser', userController.destroyUser)
-router.get('/auth', authMiddleware, userController.check)
+router.delete('/deleteUser/:id', userController.destroyUser)
 module.exports = router

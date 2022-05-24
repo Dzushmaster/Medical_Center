@@ -5,7 +5,7 @@ const visitRouter = require('./visitRouter')
 const doctorRouter = require('./doctorRouter')
 const hAnalyseRouter = require('./hAnalyseRouter')
 router.use('/user', userRouter)
-router.use('/visite', visitRouter)
+router.use('/visit', visitRouter)
 router.use('/hAnalyse', hAnalyseRouter)
 router.use('/doctor', doctorRouter)
 module.exports = router

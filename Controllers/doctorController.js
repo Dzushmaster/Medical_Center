@@ -4,12 +4,11 @@ class VisitController{
     getPage(req, res){
 
     }
-    async getDoctor(req, res, next){
+    async getDoctors(req, res, next){
         try{
-            const {id} = req.params
-            const doctor = await Visit.findAll({where:{userId: id}})
-            if (!doctor) return next(ApiError.badRequest("Can't find any visits"))
-            res.status(200).json(doctor)
+            const doctors = await Doctor.findAll()
+            if (!doctors) return next(ApiError.badRequest("Can't find any visits"))
+            res.status(200).json(doctors)
         }catch(e){
             return next(ApiError.internal(e))
         }
