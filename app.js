@@ -1,7 +1,14 @@
 require('dotenv').config();
 const express = require("express")
 const jwt = require('jsonwebtoken')
+const fs = require('fs')
 const app = express()
+const options = {
+    passphrase: "qwerty",
+    key: fs.readFileSync("openssl/CA.key").toString(),
+    cert: fs.readFileSync("openssl/CA.crt").toString()
+}
+const httpsServer = require('https')
 const httpServer = require('http').createServer(app)
 const io = require('socket.io')(httpServer, {
     cors:{
@@ -64,7 +71,7 @@ const start = async ()=>{
         await sequelize.authenticate()
         await sequelize.sync()
         httpServer.listen(WEBSOCKET_PORT, ()=>console.log(`Web socket server: http://localhost:${WEBSOCKET_PORT}`))
-        app.listen(PORT, ()=> console.log(`Common server: http://localhost:${PORT}/api`))
+        httpsServer.createServer(options, app).listen(PORT, ()=> console.log(`Common server: https://localhost:${PORT}/api`))
     }catch(e){
         console.log(e)
     }

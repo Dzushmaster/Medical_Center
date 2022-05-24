@@ -14,7 +14,7 @@ class UserController {
             });
             if (!user) return next(ApiError.internal('invalid login'))
             if (! await bcrypt.compare(req.body.password, user.password)) return next(ApiError.internal('invalid password'))
-            const accessToken = jwt.sign({id: user.id, email:user.login}, process.env.JWT_ACCESS_KEY, {expiresIn:'24h'})
+            const accessToken = jwt.sign({id: user.id, login:user.login}, process.env.JWT_ACCESS_KEY, {expiresIn:'24h'})
             const refreshToken = jwt.sign({ip: req.socket.remoteAddress}, process.env.JWT_REFRESH_KEY, {expiresIn: '30d'})
             res.cookie('refreshToken', refreshToken, {maxAge: 30*24*60*60*1000, httpOnly:true})
             return  res.status(200).json({accessToken, refreshToken, user})
@@ -49,7 +49,7 @@ class UserController {
     }
     async destroyUser(req, res, next){
         try{
-            const {id} = req.body
+            const id = req.params.id[1]
             if(!id) return next(ApiError.badRequest('Id is not given'))
             const user = await User.destroy({
                 where:{id: id}

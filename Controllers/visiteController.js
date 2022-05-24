@@ -1,13 +1,13 @@
-const {Visit} = require('../Models/models')
+const {Visit, Workday} = require('../Models/models')
 const {Desiase} = require('../Models/models')
 const ApiError = require('../errors/ApiError')
 class VisitController{
     getPage(req, res){
 
     }
-    async getAllVisits(req, res, next){
+    async getAllUserVisits(req, res, next){
         try{
-            const {id} = req.params
+            const {id, userId} = req.params
             const visit = await Visit.findAll({where:{userId: id}})
             if (!visit) return next(ApiError.badRequest("Can't find any visits"))
             res.status(200).json(visit)
@@ -15,24 +15,53 @@ class VisitController{
             return next(ApiError.internal(e))
         }
     }
+    async getAllVisits(req, res, next){
+        try{
+            const id = req.params.id[1]
+            const workdays = await Workday.findAll({where:{doctorId: id}})
+            if (!workdays) return next(ApiError.badRequest("Can't find any visits"))
+            res.status(200).json(workdays)
+        }catch(e){
+            return next(ApiError.internal(e))
+        }
+    }
     async create(req, res, next){
         try {
+            /*
             if(!req.payload){
                 return next(ApiError.forbiden("Authorise before make new visit"))
             }
-            const {id, idDoc, date, time} = req.body
-            if (!id || !idDoc || !date ||!time) return next(ApiError.badRequest('Input doctor or date/time'))
+             */
+            const {id, idDoc, date, begin, end} = req.body
+            if (!id || !idDoc || !date ||!begin || !end) return next(ApiError.badRequest('Input doctor or date/time'))
             const visit = await Visit.create({
                 userId: id,
                 doctorId: idDoc,
                 date: date,
-                time: time
+                begin: begin,
+                end: end
             })
             if (!visit) return next(ApiError.badRequest("Can't create this visit, try again with other data"))
-            const desiase = await Desiase.create({
-                visityId: visit.id
+            let workday = await Workday.findOne({ where: {
+                    doctorId: idDoc
+                }
             })
-            if(!desiase) return next(ApiError.badRequest("Can't create new desiase"))
+            if(!workday) return next(ApiError.forbiden('Doctor have no this time'))
+            workday = await Workday.update(
+                {
+                    cabinet: workday.cabinet,
+                    day: workday.day,
+                    begin: workday.begin,
+                    end: workday.end,
+                    busy: 1,
+                    createdAt: workday.createdAt,
+                    updatedAt: workday.updatedAt
+                },
+                {
+                    where: {id: workday.id}
+                }
+            )
+            if(!workday) return next(ApiError.forbiden('Doctor have no this time'))
             res.status(200).json(visit)
         }catch(e){
             return next(ApiError.internal(e))

@@ -1,8 +1,8 @@
-import {BrowserRouter,} from "react-router-dom";
+import {BrowserRouter, useHistory,} from "react-router-dom";
 import AppRouter from "./components/AppRouter";
 import NavBar from "./components/NavBar";
-
-function App() {
+import {CHAT_ROUTE} from "./utils/consts";
+function App (){
   return (
     <BrowserRouter>
         <NavBar/>

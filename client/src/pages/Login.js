@@ -24,12 +24,11 @@ const Login = observer(() => {
             let response
             if (isLogin) {
                 response = await login(_login, _password)
-                user.setUser(user)
+                user.setUser(response)
                 user.setIsAuth(true)
                 history.push(VISIT_ROUTE)
             } else {
-                response = await registration(_fullname, _birthdate, _gender, _telephone, _email, _login, _password, _conf_password)
-                console.log(response)
+                await registration(_fullname, _birthdate, _gender, _telephone, _email, _login, _password, _conf_password)
                 history.push(LOGIN_ROUTE)
             }
         }catch (e){
