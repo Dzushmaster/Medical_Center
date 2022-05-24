@@ -5,6 +5,5 @@ const router = new Router()
 
 router.get('/', hAnalyseController.getPage)
 router.post('/', hAnalyseController.create)
-router.put('/', hAnalyseController.update)
 
 module.exports = router

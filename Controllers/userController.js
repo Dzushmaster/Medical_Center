@@ -49,7 +49,7 @@ class UserController {
     }
     async destroyUser(req, res, next){
         try{
-            const id = req.params.id[1]
+            const id = req.params.id.split(':')[1]
             if(!id) return next(ApiError.badRequest('Id is not given'))
             const user = await User.destroy({
                 where:{id: id}
