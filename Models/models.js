@@ -33,8 +33,7 @@ const HAnalyse = sequelize.define('home_analyses', {
     pulse:{type: DataTypes.TINYINT,allowNull: true},
     temperature:{type: DataTypes.FLOAT,allowNull: true},
     blood_press:{type: DataTypes.STRING(8),allowNull: true},
-    date:{type: DataTypes.DATEONLY, allowNull:false},
-    time:{type: DataTypes.TIME,allowNull: false}
+    date:{type: DataTypes.DATEONLY, allowNull:false}
 })
 const User = sequelize.define('users', {
     id:{type:DataTypes.INTEGER, primaryKey:true, autoIncrement:true, allowNull:false},

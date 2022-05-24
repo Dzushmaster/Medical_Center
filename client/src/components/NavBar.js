@@ -55,7 +55,7 @@ const NavBar = observer(() => {
     }
 
     return (
-            <Navbar bg="success" variant="dark">
+            <Navbar bg="success" variant="light">
                 <Container >
                     <NavLink className="mx-auto">
                         {user.isAuth ?
