@@ -27,13 +27,9 @@ class VisitController{
     }
     async create(req, res, next){
         try {
-            /*
-            if(!req.payload){
-                return next(ApiError.forbiden("Authorise before make new visit"))
-            }
-             */
             const {id, idDoc, date, begin, end} = req.body
-            if (!id || !idDoc || !date ||!begin || !end) return next(ApiError.badRequest('Input doctor or date/time'))
+            if(!id) return next(ApiError.unauthorized('Login before book'))
+            if (!idDoc || !date ||!begin || !end) return next(ApiError.badRequest('Input doctor or date/time'))
             const visit = await Visit.create({
                 userId: id,
                 doctorId: idDoc,

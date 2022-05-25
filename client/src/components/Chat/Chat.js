@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useContext} from 'react'
 import queryString from 'query-string'
 import io from 'socket.io-client'
 import './Chat.css'
@@ -7,9 +7,8 @@ import Input from "../Input/Input";
 import Messages from "../Messages/Messages";
 let socket
 const Chat = ({location}) => {
-    const [name, setName] = useState('')
+    const [name, setName] =  useState('')
     const [room, setRoom] = useState('')
-    const [users, setUsers] = useState('')
     const [message, setMessage] = useState([])
     const [messages, setMessages] = useState([])
     const ENDPOINT = 'http://localhost:5001/'

@@ -1,7 +1,7 @@
 import React, {useContext, useState} from 'react';
 import {useHistory, useLocation} from "react-router-dom"
-import {Button, Card, Container, Form} from "react-bootstrap";
-import {LOGIN_ROUTE, VISIT_ROUTE} from "../utils/consts";
+import {Button, Card, Container, Form, NavLink, Row} from "react-bootstrap";
+import {LOGIN_ROUTE, REGISTER_ROUTE, VISIT_ROUTE} from "../utils/consts";
 import {registration, login} from "../https/userAPI";
 import {observer} from "mobx-react-lite";
 import {Context} from "../index";
@@ -46,7 +46,7 @@ const Login = observer(() => {
                     <Form className="d-flex flex-column">
                         <Form.Control className="mt-3" placeholder="Login" value={_login} onChange={e=>setLogin(e.target.value)}/>
                         <Form.Control type="password" className="mt-3" placeholder="Password" value={_password} onChange={e=>setPassword(e.target.value)}/>
-                        <Button onClick={click} className="mt-3" variant={"outline-success"} > Login </Button>
+                            <Button onClick={click} variant={"outline-success"} className="mt-3"> Login </Button>
                     </Form>
                     :
                     <Form className="d-flex flex-column">
@@ -61,7 +61,7 @@ const Login = observer(() => {
                             <Form.Check inline label="Male" name="group1" type={"radio"} id={`gender-Male`} value={"M"} checked={_gender === 'M'} onChange={e=>setGender(e.target.value)}/>
                             <Form.Check inline label="Female" name="group1" type={"radio"} value={"F"} id={`gender-Female`} checked={_gender === 'F'} onChange={e=>setGender(e.target.value)}/>
                         </div>
-                        <Button onClick={click} className="mt-3" variant={"outline-success"}> Register </Button>
+                            <Button onClick={click} className="mt-3" variant={"outline-success"}> Register </Button>
                     </Form>
 
                 }

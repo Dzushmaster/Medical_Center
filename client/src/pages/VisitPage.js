@@ -8,8 +8,11 @@ import {getAll} from "../https/visitApi";
 const VisitPage = observer(() => {
     const docId = useHistory().location.pathname.split('/')[2]
     const {visit} = useContext(Context)
+
     useEffect(()=>{
-        getAll(docId).then(data=> {visit.setVisit(data.filter(datum => datum.busy != 1))})
+        setTimeout(()=>{getAll(docId).then(data=> {visit.setVisit(data.filter(datum => datum.busy != 1))})
+        }, 2000)
+
     })
     const {doctor} = useContext(Context)
     const _doctor = doctor._doctors.find(doc=>doc.id == docId)
@@ -29,7 +32,6 @@ const VisitPage = observer(() => {
                     </Col>
                 </Row>
             </Col>
-
         </Container>
 
     );
