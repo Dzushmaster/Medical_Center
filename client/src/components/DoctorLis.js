@@ -8,7 +8,7 @@ import {getAll} from "../https/docApi";
 const DoctorLis = observer(() => {
     const {doctor} = useContext(Context)
     useEffect(()=>{
-        getAll().then(data=> {doctor.setDoctor(data); console.log(doctor.getDoctor())})
+        getAll().then(data=> {doctor.setDoctor(data);})
     }, [])
     return (
        <Row className="d-flex">

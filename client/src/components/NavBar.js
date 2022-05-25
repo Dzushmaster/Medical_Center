@@ -1,8 +1,8 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {Context} from "../index";
 import {Button, Container, Nav, Navbar, NavLink} from "react-bootstrap";
 import {observer} from "mobx-react-lite";
-import {useHistory} from "react-router-dom";
+import {useHistory, useLocation} from "react-router-dom";
 import {
     CHAT_ROUTE,
     CONSULTATION_ROUTE,
@@ -15,8 +15,9 @@ import {destroy} from "../https/userAPI";
 const NavBar = observer(() => {
     const {user} = useContext(Context)
     const history = useHistory()
-    console.log(history)
-    const isChat = CHAT_ROUTE === useHistory().location.pathname
+    const location = useLocation()
+    const isLogin = location.pathname === LOGIN_ROUTE
+    const isChat = location.pathname === CHAT_ROUTE
     function getLogin(){
         if(!isChat) history.push(LOGIN_ROUTE)
         else alert('Exit from chat')
@@ -38,12 +39,15 @@ const NavBar = observer(() => {
         else alert('Exit from chat')
     }
     async function deleteUser(){
-        try{
-            let response = destroy(user._user.id)
-            logout()
-        }catch(e){
-            alert('Error: cant delete this user')
+        if(!isChat) {
+            try{
+                let response = await destroy(user._user.id)
+                logout()
+            }catch(e){
+                alert('Error: cant delete this user')
+            }
         }
+        else alert('Exit from chat')
     }
     function logout(){
         if(!isChat) {
@@ -56,25 +60,29 @@ const NavBar = observer(() => {
 
     return (
             <Navbar bg="success" variant="light">
-                <Container >
+
                     <NavLink className="mx-auto">
-                        {user.isAuth ?
+                        { user.isAuth ?
                             <Nav>
                                 <Button onClick={getTickets} variant={"outline-dark"}>Tickets</Button>
                                 <Button onClick={getHomeAnalyse} variant={"outline-dark"} className="mx-1">Home analyses</Button>
-                                <Button onClick={logout} variant={"outline-dark"} >Log out</Button>
                                 <Button onClick={getChat} variant={"outline-dark"} className="mx-1">Consultation</Button>
-                                <Button onClick={deleteUser} variant={"outline-danger"} >Delete account</Button>
+                                <Button onClick={logout} variant={"outline-dark"} >Log out</Button>
+                                <Button onClick={deleteUser} variant={"outline-danger"} className="mx-1">Delete account</Button>
                             </Nav>
                             :
                             <Nav>
-                                <Button onClick={getLogin} variant={"outline-dark"} className="mx-1">Open login</Button>
-                                <Button onClick={getRegister} variant={"outline-dark"} >Open register</Button>
-                                <Button onClick={getChat} variant={"outline-dark"} className="mx-1">Consultation</Button>
+                                {   isLogin?
+                                    <Button onClick={getRegister} variant={"outline-dark"} className="mx-1">Register</Button>
+                                    :
+                                    <Button onClick={getLogin} variant={"outline-dark"} className="mx-1">Login</Button>
+                                }
+                                <Button onClick={getTickets} variant={"outline-dark"}>Tickets</Button>
+                                <Button onClick={getHomeAnalyse} variant={"outline-dark"} className="mx-1">Home analyses</Button>
+                                <Button onClick={getChat} variant={"outline-dark"}>Consultation</Button>
                             </Nav>
                         }
                     </NavLink>
-                </Container>
             </Navbar>
             );
 });
